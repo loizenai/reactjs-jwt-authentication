@@ -1,70 +1,95 @@
-# Getting Started with Create React App
+https://loizenai.com/reactjs-jwt-authentication-example/
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#Reactjs JWT Authentication Example
 
-## Available Scripts
+Tutorial: Reactjs JWT Token Authentication Example
 
-In the project directory, you can run:
 
-### `yarn start`
+ 
+JSON Web Token (JWT) is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. So in the tutorial, I introduce how to implement an application “Reactjs JWT token Authentication Example” with details step by step and 100% running sourcecode.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+– I give you an Epic of the application, a fullstack excutive flow from frontend to backend with overall architecture diagram.
+– I give you a layer diagram of Reactjs JWT Application.
+– I give you an implementatin of security backend sourcecode (SpringBoot + Nodejs JWT RestAPIs).
+– I guide you step by step how to develop a Reactjs JWT Authentication application.
+– Finally, I do an integrative testing from Reactjs JWT Authentication application to Backend Security RestAPIs
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+![Reactjs JWT Authentication Example](https://loizenai.com/wp-content/uploads/2020/11/Reactjs-Jwt-Authentication-Example.png)
 
-### `yarn test`
+## Overall Epic System Architecture Diagram
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Reactjs JWT Authentication Overall Diagram](https://loizenai.com/wp-content/uploads/2020/11/Reactjs-JWT-Authentication-Overall-Diagram.png)
 
-### `yarn build`
+For the Reactjs JWT Authentication tutorial, we have 2 projects:
+– Backend project (using SpringBoot or Nodejs Express) provides secured RestAPIs with JWT token.
+– Reactjs project will request RestAPIs from Backend system with the JWT Token Authentication implementation.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## JWT Authentication Sequence Diagram
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The diagram below show how our system handles User Registration and User Login processes:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![Reactjs Jwt Authentication Working Process Diagram](https://loizenai.com/wp-content/uploads/2020/11/Reactjs-Jwt-Authentication-Working-Process-Diagram.png)
 
-### `yarn eject`
+1. User Registration Phase:
+– User uses a React.js register form to post user’s info (name, username, email, role, password) to Backend API /api/auth/signup.
+– Backend will check the existing users in database and save user’s signup info to database. Finally, It will return a message (successfully or fail) to
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+2. User Login Phase:
+– User posts user/password to signin to Backend RestAPI /api/auth/signin.
+– Backend will check the username/password, if it is right, Backend will create and JWT string with secret then return it to Reactjs client.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+After signin, user can request secured resources from backend server by adding the JWT token in Authorization Header. For each request, backend will check the JWT signature and then returns back the resources based on user’s registered authorities.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Reactjs JWT Authentication Layer Diagram Overview
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![Reactjs JWT Authentication – Layer Diagram](https://loizenai.com/wp-content/uploads/2020/11/Reactjs-JWT-Authentication-Layer-Diagram-final-version-2.png)
 
-## Learn More
+Reactjs JWT Authentication would be built with 5 main kind blocks:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Reactjs Router is a standard library for routing in React. It enables the navigation among views of various components in a React Application, allows changing the browser URL, and keeps the UI in sync with the URL.
+- Reactjs Components let you split the UI into independent, reusable pieces, and think about each piece in isolation.
+- Reactjs Service is a bridge between Reactjs Component and Backend Server, it is used to do technical logic with Backend Server (using Ajax Engine to fetch data from Backend, or using Local Storage to save user login data) and returned a response data to React.js Components
+- Local Storage allow to save key/value pairs in a web browser. It is a place to save the login user’s info.
+- Axios – (an Ajax Engine) is a promise-based HTTP client for the browser and Node. js. Axios makes it easy to send asynchronous HTTP requests to REST endpoints and perform CRUD operations.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Project Goal
 
-### Code Splitting
+We create a Reactjs JWT Authentication project as below:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![Reactjs Jwt Authentication project structure](https://loizenai.com/wp-content/uploads/2020/11/Reactjs-Jwt-Authentication-project-structure.png)
 
-### Analyzing the Bundle Size
+It includes 8 components and 2 services and a router in app.js file.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+– Home page:
 
-### Making a Progressive Web App
+![Home page](https://loizenai.com/wp-content/uploads/2020/11/Reactjs-Home-Page.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+– User Register page:
 
-### Advanced Configuration
+![User Register page](https://loizenai.com/wp-content/uploads/2020/11/Reactjs-Jwt-Authentication-Register-Form.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+– Login Page:
 
-### Deployment
+![Login page](https://loizenai.com/wp-content/uploads/2020/11/reactjs-jwt-authentication-wrong-login-user-validation.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+– Profile Page:
 
-### `yarn build` fails to minify
+![profile page](https://loizenai.com/wp-content/uploads/2020/11/Reactjs-jwt-authentication-sign-in-successfully.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+– Use Page:
+
+![User page](https://loizenai.com/wp-content/uploads/2020/11/Reactjs-jwt-authentication-User-Page-Content.png)
+
+– Project Manager Page:
+
+![Project Manager Page](https://loizenai.com/wp-content/uploads/2020/11/Reatjs-jwt-authentication-login-with-a-user-with-PM-roles-successfully.png)
+
+– Reactjs Admin page:
+
+![Reactjs Admin page](https://loizenai.com/wp-content/uploads/2020/11/Reactjs-jwt-authentication-admin-page.png)
+
+## Related posts
+
+[How to Integrate Reactjs with Nodejs Tutorial](https://loizenai.com/integrate-reactjs-nodejs-tutorial/)
+[Tutorial: SpringBoot + React + MongoDB – SpringBoot React.js CRUD Example](https://loizenai.com/springboot-reactjs-mongodb-crud/)
+[Angular 10 + Nodejs JWT Token Based Authentication with MySQL Example – Express RestAPIs + JWT + BCryptjs + Sequelize](https://loizenai.com/angular-10-nodejs-jwt-authentication-mysql-examples-tutorials/)
